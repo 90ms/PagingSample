@@ -1,14 +1,28 @@
 package com.a90ms.pagingsample.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.preference.PreferenceManager
+import androidx.activity.viewModels
 import com.a90ms.pagingsample.R
+import com.a90ms.pagingsample.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class MainActivity : AppCompatActivity() {
+@AndroidEntryPoint
+class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
+
+    private val mainViewModel: MainViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        setupData()
+    }
+
+    private fun setupData() {
+        binding.run {
+            viewModel = mainViewModel
+        }
+
+
+        mainViewModel.fetchSearchImage("1234")
     }
 }
