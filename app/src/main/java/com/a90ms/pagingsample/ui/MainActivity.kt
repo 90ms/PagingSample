@@ -1,9 +1,15 @@
 package com.a90ms.pagingsample.ui
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.edit
+import androidx.lifecycle.observe
+import androidx.preference.PreferenceManager
 import com.a90ms.pagingsample.R
 import com.a90ms.pagingsample.databinding.ActivityMainBinding
+import com.a90ms.pagingsample.util.PREF_DARK_THEME
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -11,9 +17,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private val mainViewModel: MainViewModel by viewModels()
 
+    private lateinit var preferences: SharedPreferences
+    private var darkModeEnabled = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        preferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         setupData()
     }
 
@@ -22,7 +32,20 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             viewModel = mainViewModel
         }
 
+        mainViewModel.clearDatabase()
 
-        mainViewModel.fetchSearchImage("1234")
+        binding.tvTheme.setOnClickListener {
+            darkModeEnabled = preferences.getBoolean(PREF_DARK_THEME, false)
+            darkModeEnabled = !darkModeEnabled
+            preferences.edit {
+                putBoolean(PREF_DARK_THEME, darkModeEnabled)
+            }
+            if (darkModeEnabled) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY)
+            }
+            recreate()
+        }
     }
 }

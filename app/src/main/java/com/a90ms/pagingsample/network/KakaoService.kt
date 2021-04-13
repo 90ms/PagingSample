@@ -1,18 +1,17 @@
 package com.a90ms.pagingsample.network
 
-import com.a90ms.pagingsample.model.Images
-import retrofit2.Call
+import com.a90ms.pagingsample.model.ResponseImage
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface KakaoService {
-    @GET("v2/search//image")
+    @GET("v2/search/image")
     suspend fun getImageList(
         @Query("query", encoded = true) query: String? = VALUE_DEFAULT_QUERY,
         @Query("sort") sort: String? = VALUE_DEFAULT_SORT,
         @Query("page") page: Int? = VALUE_DEFAULT_PAGE,
         @Query("size") size: Int? = VALUE_DEFAULT_SIZE
-    ): Images
+    ): ResponseImage
 
     companion object {
         // default 검색어
@@ -25,6 +24,6 @@ interface KakaoService {
         private const val VALUE_DEFAULT_PAGE = 1
 
         //한 페이지에 보여질 문서 수, 1~80 사이의 값, 기본 값 80
-        private const val VALUE_DEFAULT_SIZE = 20
+        private const val VALUE_DEFAULT_SIZE = 30
     }
 }

@@ -54,6 +54,10 @@ dependencies {
     implementation("androidx.paging:paging-runtime-ktx:3.0.0-beta03")
     implementation("androidx.preference:preference-ktx:1.1.1")
 
+    // Rxjava
+    implementation("io.reactivex.rxjava3:rxandroid:3.0.0")
+    implementation("io.reactivex.rxjava3:rxjava:3.0.0")
+
     // Room
     implementation("androidx.room:room-runtime:2.2.6")
     implementation("androidx.room:room-ktx:2.2.6") // support for coroutines

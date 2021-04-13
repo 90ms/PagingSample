@@ -18,6 +18,7 @@ object LocalDatabaseModule {
     @Singleton
     fun provideAppDatabase(application: Application): AppDatabase =
         Room.databaseBuilder(application, AppDatabase::class.java, "kakao-image-db")
+            .fallbackToDestructiveMigration()
             .build()
 
     @Provides
