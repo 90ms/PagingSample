@@ -15,6 +15,7 @@ class SearchImagePagingSource(
 
             val nextPageNumber = params.key ?: 0
             val getImageData = imageRepository.fetchImageList(nextPageNumber, SEARCH_QUERY)
+
             LoadResult.Page(
                 data = getImageData,
                 prevKey = null,

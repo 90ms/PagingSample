@@ -24,6 +24,6 @@ interface KakaoService {
         private const val VALUE_DEFAULT_PAGE = 1
 
         //한 페이지에 보여질 문서 수, 1~80 사이의 값, 기본 값 80
-        private const val VALUE_DEFAULT_SIZE = 30
+        private const val VALUE_DEFAULT_SIZE = 50
     }
 }
